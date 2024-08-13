@@ -7,17 +7,26 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
-
+interface Photo {
+  id: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+  alt_description: string;
+  likes: number;
+  description: string;
+}
 function App() {
-  const [topic, setTopic] = useState("");
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
-  const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [likes, setLikes] = useState(0);
-  const [description, setDescription] = useState("");
+  const [topic, setTopic] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [likes, setLikes] = useState<number>(0);
+  const [description, setDescription] = useState<string>("");
   const handleSearch = async (topic) => {
     setPhotos([]);
     setTopic(topic);
@@ -45,7 +54,7 @@ function App() {
     getPhotosMore();
   }, [page, topic]);
 
-  const openModal = (image, likes, description) => {
+  const openModal = (image: string, likes: number, description: string) => {
     setSelectedImage(image);
     setModalIsOpen(true);
     setLikes(likes);

@@ -1,30 +1,32 @@
 import toast, { Toaster } from "react-hot-toast";
 
-const notify = () => toast("Here is your toast.");
-const SearchBar = ({ onSearch }) => {
-  const handlerSubmit = (e) => {
+interface SearchBarProps {
+  onSearch: (topic: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target;
-    const topic = form.elements.topic.value;
-    if (topic === "")
-      return toast.error("Add searsh word", {
+    const form = e.target as HTMLFormElement;
+    const topic = (form.elements.namedItem("topic") as HTMLInputElement).value;
+    if (topic === "") {
+      return toast.error("Add search word", {
         duration: 2000,
         style: {
           background: "red",
           color: "white",
         },
       });
+    }
     onSearch(topic);
-    e.target.reset();
+    form.reset();
   };
 
   return (
     <header>
-      <form onSubmit={handlerSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          // autocomplete="off"
-          // autofocus
           placeholder="Search images and photos"
           name="topic"
         />

@@ -3,13 +3,23 @@ import css from "./ImageModal.module.css";
 import { PiHeartStraightFill } from "react-icons/pi";
 Modal.setAppElement("#root");
 
-export default function ImageModal({
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  imageUrl: string | null;
+  likes: number;
+  description: string;
+}
+
+Modal.setAppElement("#root");
+
+const ImageModal: React.FC<ImageModalProps> = ({
   isOpen,
   onClose,
   imageUrl,
   likes,
   description,
-}) {
+}) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -35,4 +45,6 @@ export default function ImageModal({
       {description && <p>{description}</p>}
     </Modal>
   );
-}
+};
+
+export default ImageModal;
