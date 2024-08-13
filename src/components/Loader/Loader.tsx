@@ -1,3 +1,5 @@
+import { Bars } from "react-loader-spinner";
+
 <Bars
   height="80"
   width="80"
