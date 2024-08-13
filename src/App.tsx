@@ -27,7 +27,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [likes, setLikes] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
-  const handleSearch = async (topic) => {
+  const handleSearch = async (topic: string) => {
     setPhotos([]);
     setTopic(topic);
     setPage(1);
