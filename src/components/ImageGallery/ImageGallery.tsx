@@ -1,17 +1,9 @@
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
-
+import { Photo } from "../unsplash-api";
 interface ImageGalleryProps {
-  items: {
-    id: string;
-    urls: {
-      small: string;
-      regular: string;
-    };
-    alt_description: string;
-    likes: number;
-    description: string;
-  }[];
+  items: Photo[];
+
   openModal: (image: string, likes: number, description: string) => void;
 }
 

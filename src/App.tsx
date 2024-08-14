@@ -2,21 +2,12 @@ import { useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
-import { fetchPhotos } from "./components/unsplash-api";
+import { Photo, fetchPhotos } from "./components/unsplash-api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
-interface Photo {
-  id: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-  alt_description: string;
-  likes: number;
-  description: string;
-}
+
 function App() {
   const [topic, setTopic] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(false);
@@ -43,7 +34,7 @@ function App() {
         setError(false);
         setLoader(true);
         const data = await fetchPhotos(topic, page);
-        setPhotos([...photos, ...data.results]);
+        setPhotos((prevPhotos) => [...prevPhotos, ...data.results]);
         console.log(data);
       } catch (error) {
         setError(true);

@@ -1,13 +1,7 @@
+import { Photo } from "../unsplash-api";
+
 interface ImageCardProps {
-  item: {
-    urls: {
-      small: string;
-      regular: string;
-    };
-    alt_description: string;
-    likes: number;
-    description: string;
-  };
+  item: Photo;
   openModal: (image: string, likes: number, description: string) => void;
 }
 const ImageCard: React.FC<ImageCardProps> = ({ item, openModal }) => {
